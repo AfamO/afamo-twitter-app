@@ -7,8 +7,6 @@ export const createTweet = async (tweet: Tweet) => {
     await tweetsDB.insert(tweetsTable).values({
     owner_id: tweet.user_id,
     content: tweet.content,
-    created_at:tweet.created_at,
-    tweetQuantity:tweet.tweet_quantity,
  });
 };
 
