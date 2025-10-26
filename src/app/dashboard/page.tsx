@@ -10,7 +10,6 @@ export default function Dashboard() {
     //const {isLoaded, isSignedIn, user} = useUser();
     const [tweetList, setTweetList] = useState<Tweet[]>([]);
     const [recipient, setRecipient] = useState<string>("");
-    const [user, setUser] = useState<User>();
     const [userId, setUserId] = useState<string>("");
     const [content, setContent] = useState<string>("");
     const [createdAt, setCreateAt] = useState<Date>();
@@ -86,7 +85,6 @@ export default function Dashboard() {
                     type='hidden'
                     name='tweetOwner'
                     value={userId}
-                    onChange={(e) => setUserId(user.user_id)}
                   />
                 </div>
               </div>
