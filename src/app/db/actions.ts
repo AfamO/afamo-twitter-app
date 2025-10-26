@@ -1,14 +1,14 @@
-import { invoicesDB, customersDB } from ".";
+import { tweetsDB, usersDB } from ".";
 import { tweetsTable, usersTable, tweetShareTable } from './schema';
 import { desc, eq } from "drizzle-orm";
 
-//👇🏻 add a new row to the invoices table
-export const createTweet = async (tweet: any) => {
-    await invoicesDB.insert(tweetsTable).values({
-    owner_id: tweet.owner_id,
-    user_id: tweet.user_id,
+//👇🏻 add a new row to the tweettable
+export const createTweet = async (tweet: Tweet) => {
+    await tweetsDB.insert(tweetsTable).values({
+    owner_id: tweet.user_id,
     content: tweet.content,
-    follwers: tweet.followers,
+    created_at:tweet.created_at,
+    tweetQuantity:tweet.tweet_quantity,
  });
 };
 
@@ -34,7 +34,7 @@ export const getSingleUser = async (name: string) => {
 
 //👇🏻 add a new row to the customers table
 export const addUser = async (user: User) => {
-    await customersDB.insert(usersTable).values({
+    await usersDB.insert(usersTable).values({
         owner_id: user.user_id,
         name: user.name,
         email: user.email,
@@ -44,5 +44,5 @@ export const addUser = async (user: User) => {
 
 //👇🏻 delete a customer
 export const deleteUser = async (id: number) => {
-  await customersDB.delete(usersTable).where(eq(usersTable.id, id));
+  await usersDB.delete(usersTable).where(eq(usersTable.id, id));
 };
