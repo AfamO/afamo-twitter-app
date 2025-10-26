@@ -22,7 +22,7 @@ export const getSingleTweet = async (id: number) => {
 
 //👇🏻 get users list
 export const getUsers = async (user_id: string) => {
-    return await usersDB.select().from(usersTable).where(eq(usersTable.owner_id, user_id)).orderBy(desc(customersTable.created_at));
+    return await usersDB.select().from(usersTable).where(eq(usersTable.owner_id, user_id)).orderBy(desc(usersTable.created_at));
 };
 
 //👇🏻 get single customer
