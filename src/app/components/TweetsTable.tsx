@@ -20,7 +20,7 @@ export default function TweetsTable({tweetList}:{tweetList: Tweet[]}) {
                     <tr key={tweet.id}>
                         <td className='text-sm'>{tweet.content}</td>
 						<td className='text-sm'>{tweet.user_id}</td>
-                        <td className='text-sm'>{tweet.created_at}</td>
+                        <td className='text-sm'>{tweet.created_at.toDateString()}</td>
                         
                     </tr>
                 ))}
