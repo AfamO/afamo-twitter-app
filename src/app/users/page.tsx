@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import SideNav from "../components/SideNav";
 
 export default function Users() {
-    const [userName, setUserName] = useState<String>("");
+    const [userName, setUserName] = useState<string>("");
     const [userEmail, setUserEmail] = useState<string>("");
     const [userAddress, setUserAddress] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
@@ -27,13 +27,14 @@ export default function Users() {
           <form className='w-full' onSubmit={handleAddUser} method='POST'>
             <div className='w-full flex items-center space-x-4 mb-3'>
               <section className='w-1/2'>
-                <label>Customer&apos;s Name</label>
+                <label>UserName</label>
                 <input
                   type='text'
+                  id="userName"
                   className='w-full p-2 border border-gray-200 rounded-sm'
                   value={userName}
-                  required
                   onChange={(e) => setUserName(e.target.value)}
+                  required
                 />
               </section>
 
