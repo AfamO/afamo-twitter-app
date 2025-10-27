@@ -3,9 +3,9 @@ import {  text, serial, pgTable, timestamp, numeric } from "drizzle-orm/pg-core"
 //👇🏻 users table with its column types
 export const tweetsTable = pgTable("tweets", {
     id: serial("id").primaryKey().notNull(),
-    owner_id: text("owner_id").notNull(),
+    user_id: text("user_id").notNull(),
     content: text("content").notNull(),
-    //followers: text("followers").notNull(),
+    followers: text("followers").notNull(),
     created_at: timestamp("created_at").defaultNow(),
 });
 

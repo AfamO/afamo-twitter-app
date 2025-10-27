@@ -5,8 +5,9 @@ import { desc, eq } from "drizzle-orm";
 //👇🏻 add a new row to the tweettable
 export const createTweet = async (tweet: Tweet) => {
     await tweetsDB.insert(tweetsTable).values({
-    owner_id: tweet.user_id,
+    user_id: tweet.user_id,
     content: tweet.content,
+    followers:JSON.stringify(tweet.followers),
  });
 };
 

@@ -1,9 +1,9 @@
 interface Tweet {
-    id: string;
+    id?: string;
     user_id: string;
     content:string;
-    tweet_quantity:number;
-    created_at: Date;
+    followers: [];
+    created_at?: Date;
 }
 
 interface TweetShare {
