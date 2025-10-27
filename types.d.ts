@@ -19,12 +19,6 @@ interface User {
     address: string;
 }
 
-interface JWTPayload {
-    id: Number;
-    email:string;
-    iat?: number;
-    exp?: number
-}
 
 interface APiResponse<T=any> {
     success?:boolean;
