@@ -12,23 +12,22 @@ export default function Dashboard() {
     const [recipient, setRecipient] = useState<string>("");
     const [userId, setUserId] = useState<string>("");
     const [content, setContent] = useState<string>("");
-    const [createdAt, setCreateAt] = useState<Date>();
     const [tweetQuantity, setTweetQuantity] = useState<number>(1);
     const [users, setUsers] = useState([]);
+    const [followers, setFollowers] = useState(["1","2"]);
 
-    const router = useRouter();
+  
 
     const handleAddItem = (e:React.FormEvent) => {
         e.preventDefault();
-        if (content.trim() && tweetQuantity >=1) {
+        if (content.trim() ) {
             setTweetList([
                 ...tweetList,
                 {
                     id: Math.random().toString(36).substring(2,9),
                     content:content,
                     user_id:userId,
-                    tweet_quantity:tweetQuantity,
-                    created_at:new Date(),
+                    followers:followers,
                 },
             ]);
         }
@@ -36,12 +35,32 @@ export default function Dashboard() {
         setUserId("");
         setTweetQuantity(0);
     };
-    
-    
+    const createTweet = async () => {
+		try {
+			const res = await fetch("/api/tweets", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					users,
+					user_id: userId,
+          content: content,
+          followers:followers,
+				}),
+			});
+			const data = await res.json();
+			alert(data.message);
+			
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        //call createInvoice() 
+        createTweet() 
     };
     
     return (

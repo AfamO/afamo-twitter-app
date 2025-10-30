@@ -2,8 +2,8 @@ interface Tweet {
     id?: string;
     user_id: string;
     content:string;
-    followers: [];
-    created_at?: Date;
+    followers: string[];
+    created_at?: Date |undefined;
 }
 
 interface TweetShare {
@@ -21,7 +21,7 @@ interface User {
 
 
 interface APiResponse<T=any> {
-    success?:boolean;
+    success?:boolean | undefined;
     error?: string;
     data?: T;
     

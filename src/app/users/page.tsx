@@ -3,19 +3,70 @@
 import UsersTable from "../components/UsersTable";
 import { useCallback, useEffect, useState } from "react";
 import SideNav from "../components/SideNav";
+import { useRouter } from "next/router";
+import { useUser } from "@clerk/nextjs";
 
 export default function Users() {
+    const {isLoaded, isSignedIn, user} = useUser();
     const [userName, setUserName] = useState<string>("");
     const [userEmail, setUserEmail] = useState<string>("");
     const [userAddress, setUserAddress] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
     const [users, setUsers] = useState([{'id':12,'name':'Ciga Igbo','email':'ciag@igbo.com'}])
 
+    //const router = useRouter();
+    // Fetch Users
+    const fetchUsers = useCallback(async () => {
+      console.log("The clerk userId=="+user?.id)
+      try {
+        
+        const res = await fetch(`/api/users?user_id=${user?.id}`);
+        const data = await res.json();
+        setUsers(data);
+      } catch(err) {
+        console.log(err);
+      }
+    }, [user]);
+
+    useEffect (()=>{
+      if(user){
+        fetchUsers()
+      }
+    }, [fetchUsers,user])
+    // Create Users
+    const createUser = async () => {
+      setLoading(true);
+		try {
+			const res = await fetch("/api/users", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					  user_id: user?.id,
+            name: userName,
+            email: userEmail,
+            address: userAddress,
+				}),
+			});
+			const data = await res.json();
+			alert(data.message);
+      setUserAddress("");
+      setUserEmail("");
+      setUserName("");
+      setLoading(false);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
     const handleAddUser = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // createCustomer logic here
+        createUser();
     }
-
+    if(!isLoaded || !isSignedIn) {
+        return <p>Loading...</p>
+    }
     return (
         <div className='w-full'>
       <main className='min-h-[90vh] flex items-start'>
