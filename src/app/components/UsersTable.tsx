@@ -2,6 +2,8 @@
 interface User {
      name: string;
      email: string;
+     address: string;
+     created_at:string;
      id: number;
 }
 
@@ -13,7 +15,7 @@ export default function CustomersTable({
 
     const deleteUser = async (id:number) => {
         try {
-            const request = await fetch(`/api/users?id=${id}`, {
+            const request = await fetch(`/api/users?user_id=${id}`, {
                 method: "DELETE",
             })
             const response = await request.json();
@@ -29,6 +31,7 @@ export default function CustomersTable({
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Address</th>
                     <th>Action</th>
                 </tr>
 
@@ -38,6 +41,7 @@ export default function CustomersTable({
                     <tr key={user.id}>
                         <td className='text-sm'>{user.name}</td>
 						<td className='text-sm'>{user.email}</td>
+                        <td className='text-sm'>{user.address}</td>
 						<td className='text-sm'>
 							<button className='p-2 bg-red-500 text-red-50  text-xs rounded-sm' onClick={()=> deleteUser(user.id)}>
 								Delete

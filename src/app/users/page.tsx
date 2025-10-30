@@ -12,7 +12,7 @@ export default function Users() {
     const [userEmail, setUserEmail] = useState<string>("");
     const [userAddress, setUserAddress] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
-    const [users, setUsers] = useState([{'id':12,'name':'Ciga Igbo','email':'ciag@igbo.com'}])
+    const [users, setUsers] = useState([])
 
     //const router = useRouter();
     // Fetch Users
@@ -22,7 +22,8 @@ export default function Users() {
         
         const res = await fetch(`/api/users?user_id=${user?.id}`);
         const data = await res.json();
-        setUsers(data);
+        setUsers(data.user);
+        console.log("Fetched Clerk Data::"+JSON.stringify(data));
       } catch(err) {
         console.log(err);
       }

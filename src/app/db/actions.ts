@@ -13,7 +13,7 @@ export const createTweet = async (tweet: Tweet) => {
 
 //👇🏻 get all user's invoices
 export const getUserTweets = async (user_id: string) => {
-    return await tweetsDB.select().from(tweetsTable).where(eq(tweetsTable.owner_id, user_id)).orderBy(desc(tweetsTable.created_at));
+    return await tweetsDB.select().from(tweetsTable).where(eq(tweetsTable.user_id, user_id)).orderBy(desc(tweetsTable.created_at));
 };
 
 //👇🏻 get single invoice
@@ -27,8 +27,8 @@ export const getUsers = async (user_id: string) => {
 };
 
 //👇🏻 get single customer
-export const getSingleUser = async (name: string) => {
-    return await usersDB.select().from(usersTable).where(eq(usersTable.name, name));
+export const getSingleUser = async (user_id: string) => {
+    return await usersDB.select().from(usersTable).where(eq(usersTable.owner_id, user_id));
 };
 
 //👇🏻 add a new row to the customers table
